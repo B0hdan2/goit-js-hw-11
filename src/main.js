@@ -9,7 +9,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 // img
 import error from './img/group.svg';
 
-import { formEl, galleryList } from './js/refs';
+import { formEl, galleryList, loaderEl } from './js/refs';
 import { requestToServer } from './js/pixabay-api';
 import { renderCard } from './js/render-functions';
 
@@ -17,9 +17,12 @@ formEl.addEventListener('submit', onSubmit);
 
 function onSubmit(event) {
   event.preventDefault();
-  galleryList.innerHTML = '';
 
   const inputValue = event.currentTarget.elements.search.value.trim();
+
+  loaderEl.classList.remove('is-hidden');
+  galleryList.innerHTML = '';
+
 
   requestToServer(inputValue)
     .then(response => {
@@ -48,5 +51,8 @@ function onSubmit(event) {
       });
       lightbox.refresh();
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => {
+      loaderEl.classList.add('is-hidden');
+    });
 }

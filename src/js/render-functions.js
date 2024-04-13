@@ -1,5 +1,5 @@
 export function renderCard(photos) {
-return photos.map((photo)=> `<li class="gallery__item">
+return photos.slice(0, 9).map((photo)=> `<li class="gallery__item">
 <a href="${photo.largeImageURL}">
 <img class="gallery__img" src="${photo.largeImageURL}" alt="${photo.tags}">
  <div Class="info-gallery__box">
