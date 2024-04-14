@@ -9,6 +9,11 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 // img
 import error from './img/group.svg';
 
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 import { formEl, galleryList, loaderEl } from './js/refs';
 import { requestToServer } from './js/pixabay-api';
 import { renderCard } from './js/render-functions';
@@ -45,10 +50,6 @@ function onSubmit(event) {
 
       galleryList.innerHTML = renderCard(response.hits);
 
-      const lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-      });
       lightbox.refresh();
     })
     .catch(error => console.log(error))
