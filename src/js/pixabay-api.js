@@ -8,6 +8,7 @@ export function requestToServer(query) {
     orientation: 'horizontal',
     safesearch: true,
     key: API_KEY,
+    per_page: 9,
   });
 
   return fetch(`${BASE_URL}?${searchParams}`).then(response => {
